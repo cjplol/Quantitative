@@ -10,8 +10,14 @@ history_path=os.path.join(workspace_path,"history") #历史对话记录文件目
 class OLLAMA:
     def __init__(self,modelname='deepseek-r1:32b'):
         self.modelname=modelname
-        self.history = []       #对话内容
-        self.get_savefile()    #读取现有的历史对话文件
+        self.check_history_dir()    #检查dir目录是否存在，不存在则创建
+        self.history = []           #对话内容
+        self.get_savefile()         #读取现有的历史对话文件
+
+    #检查dir目录是否存在，不存在则创建
+    def check_history_dir(self):
+        if not os.path.exists(history_path):
+            os.makedirs(history_path)
 
     #获取现有的历史对话文件
     def get_savefile(self):
